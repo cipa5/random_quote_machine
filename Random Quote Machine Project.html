@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color:red;
+        }
+        
+    </style>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <title>Random Quote Machine</title>
+        <script>
+            const QUOTEWALLET=[
+                {
+                    quote:"The greatest glory in living lies not in never falling, but in rising every time we fall",
+                    author:"Nelson Mandela"
+                },
+                {
+                    quote:"The way to get started is to quit talking and begin doing.",
+                    author:"Walt Disney"
+                },
+                {
+                    quote:"Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking.",
+                    author:"Steve Jobs"
+                },
+                {
+                    quote:"If you look at what you have in life, you'll always have more. If you look at what you don't have in life, you'll never have enough.",
+                    author:"Oprah Winfrey"
+                }
+            ];
+            window.onload=init;
+            function init() {
+                QuoteGenerator()
+            }
+            function QuoteGenerator(){
+                let quoteSize=QUOTEWALLET.length;
+                let randomNumber=Math.floor(Math.random()*quoteSize);
+                let randomQuote=QUOTEWALLET[randomNumber]
+                let twitterLink="https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text="
+                let apiQuote=randomQuote.quote.replace(/ /g,"%20");
+                twitterLink += apiQuote
+                //Adding an Author to the link
+                let apiAuthor=randomQuote.author.replace(/ /g,"%20");
+                twitterLink += " - " + apiAuthor
+
+                document.getElementById("text").innerText=randomQuote.quote;
+                document.getElementById("author").innerText=randomQuote.author;
+                document.getElementById("tweet-quote").href=twitterLink;
+                
+                
+            }
+
+        </script>
+    </head>
+    <body>
+        <wrapper id="quote-box">
+        <div class="container w-100 bg-info ">
+        <div class="row py-5">
+        <div id="cardg" class="card mx-auto" style="width: 18rem;">
+        <div class="card-body w-100">
+        <div class="card-header bg-secondary">Random Quote Machine</div>
+        <div id="text"></div>
+        <div id="author"></div>
+    
+            <button class="btn btn-success btn-block" id="new-quote" onclick="QuoteGenerator();">New Quote</button>
+            <a href="#" target="_blank" class="btn btn-block btn-primary" id="tweet-quote">Tweet Quote</a>
+        </div>
+        </div>
+        <div>
+        </div>
+        </wrapper>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+
+    </body>
+</html>
